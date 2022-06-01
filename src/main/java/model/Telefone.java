@@ -12,6 +12,7 @@ public class Telefone {
 		return id;
 	}
 
+	//teste
 	public void setId(Long id) {
 		this.id = id;
 	}
