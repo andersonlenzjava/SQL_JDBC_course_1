@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexaojdbc.SingleConnection;
+import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
@@ -57,7 +58,7 @@ public class UserPosDAO {
 			connection.commit();
 
 		} catch (Exception e) {
-			e.printStackTrace();//colocar aqui dentro para mostrar se nao passar 
+			e.printStackTrace();// colocar aqui dentro para mostrar se nao passar
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {
@@ -114,6 +115,37 @@ public class UserPosDAO {
 
 	}
 
+	public List<BeanUserFone> listaUserFone(Long idUser) {
+
+		List<BeanUserFone> beanUserFones = new ArrayList<BeanUserFone>();
+
+		String sql = " select nome, numero, email from telefoneuser as fone ";
+		sql += " inner join userposjava as userp ";
+		sql += " on fone.usuariopessoa = userp.id ";
+		sql += " where userp.id = " + idUser;
+
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				BeanUserFone userFone = new BeanUserFone();
+				userFone.setEmail(resultSet.getString("email"));
+				userFone.setNome(resultSet.getString("nome"));
+				userFone.setNumero(resultSet.getString("numero"));
+				
+				beanUserFones.add(userFone);
+ 
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return beanUserFones;
+
+	}
+
 	public void atualizar(Userposjava userposjava) {
 		try {
 
@@ -155,4 +187,31 @@ public class UserPosDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void deleteFonesPorUser(long idUser) {
+		try {
+		
+		String sqlFone = "DELETE FROM public.telefoneuser WHERE usuariopessoa =" + idUser;
+		String sqlUser = "DELETE FROM public.userposjava WHERE id =" + idUser;
+		
+			PreparedStatement preparedStatement = connection.prepareStatement(sqlFone);
+			preparedStatement.executeUpdate();
+			connection.commit();
+			
+			preparedStatement = connection.prepareStatement(sqlUser);
+			preparedStatement.executeUpdate();
+			connection.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+	}
+	
 }

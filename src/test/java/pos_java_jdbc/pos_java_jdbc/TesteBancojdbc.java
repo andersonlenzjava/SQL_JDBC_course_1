@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import conexaojdbc.SingleConnection;
 import dao.UserPosDAO;
+import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
@@ -111,4 +112,27 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 		dao.salvarTelefone(telefone);
 	}
 
+	@Test
+	public void testeCarregaFonesUser (){
+		
+		UserPosDAO dao = new UserPosDAO();
+		
+		List<BeanUserFone> beanUserFones = dao.listaUserFone(10L);
+		
+		for (BeanUserFone beanUserFone : beanUserFones) {
+			
+			System.out.println(beanUserFone);
+			System.out.println("----------------------------------------");
+			
+		}
+	}
+	
+	@Test
+	public void testDeleteUserFone() {
+		
+		UserPosDAO dao = new UserPosDAO();
+		dao.deleteFonesPorUser(13L);
+		
+	}
+	
 }
