@@ -2,6 +2,8 @@ package model;
 
 public class Telefone {
 
+	//classe para cadastrar os telefones para o id do aluno
+	
 	private Long id;
 	private String numero;
 	private String tipo;

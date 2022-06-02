@@ -2,6 +2,8 @@ package model;
 
 public class BeanUserFone {
 	
+	//classe para trazer uma lista de telefones
+	
 	private String nome;
 	
 	private String numero;
