@@ -12,7 +12,7 @@ import model.BeanUserFone;
 import model.Telefone;
 import model.Userposjava;
 
-//classe para testar separadamente a conexao ao banco 
+//classe para testar separadamente cada parte do sistema, e a conexão com o banco
 
 public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 
@@ -25,7 +25,7 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 		 //add dinâmico // agora com id automatico ele vai adicionar a posição de forma automatica
 		// userposjava.setId(6L);//disque é uma posição long // agora é gerado automaticamente dentro do banco 
 		
-		userposjava.setNome("João");
+		 userposjava.setNome("João");
 		 userposjava.setEmail("joao@gmail.com");
 
 		 userPosDAO.salvar(userposjava);
@@ -35,8 +35,8 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 		// SingleConnection.getConnection();
 
 	}
+	
 	// naõ precisa instanciar pois é um método static
-
 	// traz os dados da lista
 	@Test
 	public void inintListar() {
@@ -72,13 +72,14 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 
 	}
 	
+	//mudar o nome de uma coluna de um item id
 	@Test
 	public void initAtualizar () {
 		try {
 		
 		UserPosDAO dao = new UserPosDAO();
 		
-			Userposjava objetoBanco = dao.buscar(5l);
+			Userposjava objetoBanco = dao.buscar(5L);
 			objetoBanco.setNome("Nome mudado com método atualizar ");
 			
 			dao.atualizar(objetoBanco);
@@ -88,6 +89,7 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 		}
 	}
 	
+	//deletar pelo id 
 	@Test
 	public void initDeletar() {
 		try {
@@ -100,6 +102,7 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 		}
 	}
 	
+	//insere dados em uma tabela filha pelo id 
 	@Test
 	public void testeInsertTelefone() {
 		
@@ -112,6 +115,7 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 		dao.salvarTelefone(telefone);
 	}
 
+	//retorna a lista de telefones pelo id 
 	@Test
 	public void testeCarregaFonesUser (){
 		
@@ -127,6 +131,7 @@ public class TesteBancojdbc {// realiza o teste unitário como se fosse um main
 		}
 	}
 	
+	//deleta o aluno pelo id 
 	@Test
 	public void testDeleteUserFone() {
 		

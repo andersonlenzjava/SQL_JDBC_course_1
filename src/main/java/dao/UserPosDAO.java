@@ -45,6 +45,7 @@ public class UserPosDAO {
 		}
 	}
 
+	//insere um telefone na classe filha numeroTelefone
 	public void salvarTelefone(Telefone telefone) {
 
 		try {
@@ -115,6 +116,7 @@ public class UserPosDAO {
 
 	}
 
+	//retorna a lista de telefones pelo id com inner join
 	public List<BeanUserFone> listaUserFone(Long idUser) {
 
 		List<BeanUserFone> beanUserFones = new ArrayList<BeanUserFone>();
@@ -146,6 +148,7 @@ public class UserPosDAO {
 
 	}
 
+	//mudar o valor de uma coluna pelo id 
 	public void atualizar(Userposjava userposjava) {
 		try {
 
@@ -169,6 +172,7 @@ public class UserPosDAO {
 		}
 	}
 
+	//deleta um aluno pelo id 
 	public void deletar(Long id) {
 		try {
 
@@ -188,6 +192,7 @@ public class UserPosDAO {
 		}
 	}
 	
+	//deleta um aluno pelo id, quando tem uma tabela filha viculada 
 	public void deleteFonesPorUser(long idUser) {
 		try {
 		
